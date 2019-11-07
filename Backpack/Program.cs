@@ -22,9 +22,17 @@ namespace Backpack
                 {
                     // lägga till föremål
                     case "1":
-                        Console.WriteLine("vad vill du lägga till?");
-                        string adderaDetta = Console.ReadLine();
-                        ryggsacken.Add(adderaDetta);
+                        // endast 6 föremål är tillåtna
+                        if (ryggsacken.Count < 6)
+                        {
+                            Console.WriteLine("vad vill du lägga till?");
+                            string adderaDetta = Console.ReadLine();
+                            ryggsacken.Add(adderaDetta);
+                        }
+                        else 
+                        {
+                            Console.WriteLine("tyvärr, ryggsäcken är full!");
+                        }                        
                         break;
                     // skriv ut innehållet
                     case "2":
@@ -34,10 +42,19 @@ namespace Backpack
                             Console.WriteLine(rad);
                         }
                         break;
-                    // rensa innehållet, samtliga föremål
+                    // rensa innehållet, sist inlagda föremål
                     case "3":
-                        ryggsacken.Clear();
-                        Console.WriteLine("innehållet rensat!");
+                        // finns det något i ryggsäcken?
+                        if (ryggsacken.Count > 0)
+                        {
+                            int indSista = ryggsacken.Count - 1;
+                            ryggsacken.RemoveAt(indSista);
+                            Console.WriteLine("senast inlagda föremål borttaget!");
+                        }
+                        else
+                        {
+                            Console.WriteLine("ryggsäcken är redan tom!");
+                        }
                         break;
                     // avsluta
                     case "4":
